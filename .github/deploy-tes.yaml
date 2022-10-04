@@ -1,0 +1,19 @@
+name: Deploy Test
+on:
+  push:
+    paths:
+      - "*"
+    branches:
+      - main
+
+jobs:
+  build-publish-image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Invoke workflow in another repo with inputs
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: Build and publish image
+        repo: github-remote-workflows/shared-workflows
+        token: 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
+        inputs: '{"docker_repository": "test", "tag": "main", "repository": "github-remote-workflows/use-workflow", "access_token": "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" }'
